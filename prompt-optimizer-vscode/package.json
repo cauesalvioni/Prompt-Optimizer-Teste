@@ -1,0 +1,112 @@
+{
+  "name": "prompt-optimizer",
+  "displayName": "Prompt Optimizer for Claude",
+  "description": "Otimize seus prompts para Claude usando IA. Analisa e reescreve prompts aplicando as melhores práticas de engenharia de prompts.",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning"
+  ],
+  "keywords": [
+    "claude",
+    "anthropic",
+    "prompt",
+    "ai",
+    "llm",
+    "prompt engineering"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "promptOptimizer.open",
+        "title": "Abrir Prompt Optimizer",
+        "category": "Prompt Optimizer",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "promptOptimizer.setApiKey",
+        "title": "Configurar API Key do Claude",
+        "category": "Prompt Optimizer",
+        "icon": "$(key)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "promptOptimizer.open"
+        },
+        {
+          "command": "promptOptimizer.setApiKey"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "promptOptimizer.open",
+          "group": "z_commands",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "promptOptimizer.open",
+        "key": "ctrl+shift+p ctrl+shift+o",
+        "mac": "cmd+shift+p cmd+shift+o"
+      }
+    ],
+    "configuration": {
+      "title": "Prompt Optimizer",
+      "properties": {
+        "promptOptimizer.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Sua API Key da Anthropic para usar o Claude",
+          "markdownDescription": "Obtenha sua API key em [console.anthropic.com](https://console.anthropic.com)"
+        },
+        "promptOptimizer.model": {
+          "type": "string",
+          "default": "claude-sonnet-4-20250514",
+          "enum": [
+            "claude-sonnet-4-20250514",
+            "claude-opus-4-5",
+            "claude-haiku-4-5-20251001"
+          ],
+          "description": "Modelo Claude a ser utilizado para otimização"
+        },
+        "promptOptimizer.language": {
+          "type": "string",
+          "default": "pt-BR",
+          "enum": ["pt-BR", "en-US"],
+          "enumDescriptions": ["Português (Brasil)", "English (US)"],
+          "description": "Idioma da interface e respostas"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
